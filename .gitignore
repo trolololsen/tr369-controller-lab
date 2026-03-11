@@ -1,0 +1,11 @@
+# certificate files
+*.key
+*.crt
+*.csr
+*.srl
+
+# docker data
+*.log
+
+# system files
+.DS_Store
