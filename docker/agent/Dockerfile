@@ -17,9 +17,9 @@ RUN apt update && apt install -y \
 
 WORKDIR /opt
 
-RUN git clone https://github.com/BroadbandForum/obuspa-test-controller.git
+RUN git clone https://github.com/BroadbandForum/obuspa.git
 
-WORKDIR /opt/obuspa-test-controller
+WORKDIR /opt/obuspa
 
 RUN autoreconf --install
 RUN pkg-config --modversion sqlite3
@@ -28,8 +28,5 @@ RUN make
 
 RUN mkdir -p /config
 RUN mkdir -p /usr/local/var/obuspa
-RUN chmod 0777 /usr/local/var/obuspa
 
-EXPOSE 9001
-
-CMD ["./obuspa", "-r", "/config/controller.conf", "-a", "/certs/controller.pem", "-t", "/certs/ca.crt"]
+CMD ["./obuspa", "-r", "/config/agent.conf"]

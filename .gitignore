@@ -3,6 +3,7 @@
 *.crt
 *.csr
 *.srl
+*.pem
 
 # docker data
 *.log

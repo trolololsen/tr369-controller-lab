@@ -1,16 +1,14 @@
-version: "3.9"
-
 services:
-
   mqtt:
     image: eclipse-mosquitto
     container_name: usp-mqtt
     volumes:
-      - ./docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - ./certs:/mosquitto/certs
+      - ./docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./certs:/mosquitto/certs:ro
     ports:
       - "1883:1883"
       - "8883:8883"
+    restart: unless-stopped
 
   controller:
     build: ./docker/controller
@@ -18,7 +16,26 @@ services:
     depends_on:
       - mqtt
     volumes:
-      - ./docker/controller/controller.conf:/config/controller.conf
-      - ./certs:/certs
+      - ./docker/controller/controller.conf:/config/controller.conf:ro
+      - ./certs:/certs:ro
+      - controller-db:/usr/local/var/obuspa
     ports:
       - "9001:9001"
+    command: ["./obuspa", "-r", "/config/controller.conf", "-a", "/certs/controller.pem", "-t", "/certs/ca.crt"]
+    restart: unless-stopped
+
+  agent:
+    build: ./docker/agent
+    container_name: usp-agent
+    depends_on:
+      - mqtt
+    volumes:
+      - ./docker/agent/agent.conf:/config/agent.conf:ro
+      - ./certs:/certs:ro
+      - agent-db:/usr/local/var/obuspa
+    command: ["./obuspa", "-r", "/config/agent.conf", "-a", "/certs/agent.pem", "-t", "/certs/ca.crt"]
+    restart: unless-stopped
+
+volumes:
+  controller-db:
+  agent-db:
