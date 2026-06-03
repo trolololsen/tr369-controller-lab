@@ -16,4 +16,4 @@ fi
 container_path="/tmp/$(basename "$file")"
 
 docker cp "$file" "usp-controller:$container_path"
-docker exec usp-controller ./obuspa -p -v 4 -x "$container_path" -a /certs/controller.pem -t /certs/ca.crt
+MSYS_NO_PATHCONV=1 docker exec usp-controller ./obuspa -p -v 4 -x "$container_path" -a /certs/controller.pem -t /certs/ca.crt
