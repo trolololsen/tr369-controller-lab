@@ -18,6 +18,8 @@ This repository provides a lightweight TR-369 (USP) lab using:
 
 ## Quick start
 
+For new-machine setup notes, see `SETUP.md`.
+
 1. Generate lab certificates:
 
 ```bash
