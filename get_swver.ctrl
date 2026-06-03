@@ -1,2 +1,2 @@
-msg_id:"1" to_id:"router-sn-003" mqtt_topic:"/usp/endpoint/router-sn-003" mqtt_instance:"1"
+msg_id:"1" to_id:"os::14360E-S240Y41000039" mqtt_topic:"/usp/endpoint/router-sn-003" mqtt_instance:"1"
 msg_type:"Get" param_paths:"Device.DeviceInfo.SoftwareVersion"

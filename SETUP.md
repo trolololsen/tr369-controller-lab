@@ -50,7 +50,7 @@ Broker address: 192.168.51.102
 Broker port: 1883
 MQTT protocol: 5.0
 MQTT client ID: router-sn-003
-USP EndpointID: router-sn-003
+USP EndpointID: os::14360E-S240Y41000039
 Controller EndpointID: controller-1
 Controller MQTT topic: /usp/controller
 Router MQTT response/subscription topic: /usp/endpoint/router-sn-003
@@ -61,6 +61,12 @@ Then send the current software-version query:
 
 ```powershell
 .\scripts\send-ctrl.ps1 .\get_swver.ctrl
+```
+
+Or from Git Bash:
+
+```bash
+./scripts/send-ctrl.sh ./get_swver.ctrl
 ```
 
 The test controller sends the USP request but does not print decoded replies.
