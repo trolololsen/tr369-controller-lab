@@ -41,6 +41,31 @@ Stop it with:
 docker compose down
 ```
 
+## Send a controller command file
+
+For the current real-router test, configure the router side consistently:
+
+```text
+Broker address: 192.168.51.102
+Broker port: 1883
+MQTT protocol: 5.0
+MQTT client ID: router-sn-003
+USP EndpointID: router-sn-003
+Controller EndpointID: controller-1
+Controller MQTT topic: /usp/controller
+Router MQTT response/subscription topic: /usp/endpoint/router-sn-003
+TLS: disabled for first plain-MQTT test
+```
+
+Then send the current software-version query:
+
+```powershell
+.\scripts\send-ctrl.ps1 .\get_swver.ctrl
+```
+
+The test controller sends the USP request but does not print decoded replies.
+Watch broker, controller, router, or packet-capture logs when validating replies.
+
 ## Regenerate certificates
 
 Use Git Bash, WSL, or another shell with OpenSSL available:
